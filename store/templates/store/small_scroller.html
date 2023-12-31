@@ -1,0 +1,55 @@
+{% load static %}
+<!-- <div class="scroll-container">
+  <img src="{% static 'images/author1.jpg' %}" alt="Cinque Terre" width="200" height="100">
+  <img src="{% static 'images/author2.jpg' %}" alt="Forest" width="200" height="100">
+  <img src="{% static 'images/author3.jpg' %}" alt="Northern Lights" width="200" height="100">
+  <img src="{% static 'images/author4.jpg' %}" alt="Mountains" width="200" height="100">
+  <img src="{% static 'images/author1.jpg' %}" alt="Cinque Terre" width="200" height="100">
+  <img src="{% static 'images/author2.jpg' %}" alt="Forest" width="200" height="100">
+  <img src="{% static 'images/author3.jpg' %}" alt="Northern Lights" width="200" height="100">
+  <img src="{% static 'images/author4.jpg' %}" alt="Mountains" width="200" height="100">
+  <img src="{% static 'images/author1.jpg' %}" alt="Cinque Terre" width="200" height="100">
+  <img src="{% static 'images/author2.jpg' %}" alt="Forest" width="200" height="100">
+  <img src="{% static 'images/author3.jpg' %}" alt="Northern Lights" width="200" height="100">
+  <img src="{% static 'images/author4.jpg' %}" alt="Mountains" width="200" height="100">
+</div> -->
+
+<style>
+  .wrapper{
+    max-height:210px;
+    border:0px solid #ddd;
+    display:flex;
+    overflow-x:auto ;
+}
+.wrapper::-webkit-scrollbar{
+  width:0;
+}
+
+.child-img{
+  line-height:210px;
+  width:150px;
+  height:150px;
+  padding:20px;
+  border-radius: 50%;
+}
+</style>
+
+
+<div class="wrapper">
+          <img class="child-img" src="{% static 'images/author1.jpg' %}" alt="image" />
+          <img class="child-img" src="{% static 'images/author2.jpg' %}" alt="image" />
+    
+          <img class="child-img" src="{% static 'images/author1.jpg' %}" alt="image" />
+          <img class="child-img" src="{% static 'images/author2.jpg' %}" alt="image" />
+          <img class="child-img" src="{% static 'images/author1.jpg' %}" alt="image" />
+          <img class="child-img" src="{% static 'images/author2.jpg' %}" alt="image" />
+                <img class="child-img" src="{% static 'images/author1.jpg' %}" alt="image" />
+          <img class="child-img" src="{% static 'images/author2.jpg' %}" alt="image" />
+    
+          <img class="child-img" src="{% static 'images/author1.jpg' %}" alt="image" />
+          <img class="child-img" src="{% static 'images/author2.jpg' %}" alt="image" />
+          <img class="child-img" src="{% static 'images/author1.jpg' %}" alt="image" />
+          <img class="child-img" src="{% static 'images/author2.jpg' %}" alt="image" />
+    
+          
+    </div>
