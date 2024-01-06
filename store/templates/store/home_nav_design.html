@@ -1,0 +1,54 @@
+{% load static %}
+<style>
+  .my_nav{
+    position: relative;
+    height:500px;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  #my_nav_img1{
+    width:25%;
+    height: 65%;
+    margin-top: 150px;
+  }
+  #my_nav_img2{
+    height: 100%;
+    width: 25%;
+  }
+  #my_nav_col h1{
+    margin-top: 100px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 40px;
+
+  }
+  #my_nav_col h6{
+   font-size:15px;
+   margin-right:90px ; 
+  }
+  #my_nav_col h2{
+    margin-top: 60px;
+    font-size: 30px;
+    text-align: left;
+  }
+  #my_nav_col p{
+    text-align: left;
+    }
+  #my_nav_col img{
+    height: 28px;
+  }
+</style>
+<div class="my_nav" >
+
+  <img id="my_nav_img1" src="{% static 'images/dashboard_image2.png' %}"/>
+  <div class="col" id="my_nav_col">
+    <h1>Welcome to BookWorm</h1>
+    <h6>Your Haven for Endless Stories!</h6>
+    <h2><img src="{%static 'images/book_nav.png' %}"> Explore Worlds, Discover Adventures<img src="{%static 'images/globe.png' %}"></h2>
+    <br>
+    <p>Dive into the magic of literature at BookWorm,where every book is a portal to a new world.Immerse yourself in captivating stories, timeless classics, and the latest literary gems. Whether you're a bookworm or a casual reader, we have something for every avid mind.</p>
+  </div>
+  <img id="my_nav_img2" src="{% static 'images/dashboard_image1.png' %}"/>
+
+</div>

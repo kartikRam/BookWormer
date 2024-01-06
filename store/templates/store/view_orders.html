@@ -2,26 +2,14 @@
 {% load static %}
 {% block content %}
 <style>
-	table, th, td {
+    table, th, td {
     border: 0px solid black;
   }
-  #update_cart_button{
-    background: transparent;
-    color:#769FCD;
-    border:2px solid #769FCD;
-    border-radius: 20px;
-    padding:5px;
-  }
-  .button{
-    border: 2px solid #769FCD;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
 </style>
-	<br>
+    <br>
     <div class="container" >
     <!-- Shopping cart table -->
-           <h2>Shopping Cart</h2>
+           <h2>Orders</h2>
        
            <div class="table-responsive">
               <table class="table  m-0">
@@ -32,13 +20,12 @@
                     <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
                     <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
                     <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
-                    <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+                    
                   </tr>
                 </thead>
                 <tbody>
         
-                  {% for i in cart%}
-                  <form action="{% url 'update_cart' i.id %}" method="POST">
+                  {% for i in order%}
                       {% csrf_token %}
                   <tr>
                     <td class="p-4">
@@ -48,8 +35,8 @@
                         <div class="media-body" >
                           <a href="" class="d-block " >{{i.book.name}}</a>
                           <small>
-                            <span  >by {{i.book.author.name}}</span>
-                            <span class="ui-product-color ui-product-color-sm align-text-bottom" ></span> &nbsp;
+                            <span  >by {{i.book.author.name}}</span><br>
+                            <span class="ui-product-color ui-product-color-sm align-text-bottom" >orderd on {{i.date_created}}</span> &nbsp;
                             
                           </small>
                         </div>
@@ -58,13 +45,10 @@
                     <td class="text-right font-weight-semibold align-middle p-4">{{i.price}}</td>
                     
                     <td class="align-middle p-4">
-                        <input id="quantity" name="quantity" type="number" min="0" class="form-control text-center" value="{{i.quantity}}">
-                      
+                        {{i.quantity}}
                     </td>
                     <td class="text-right font-weight-semibold align-middle p-4">{% widthratio i.price 1 i.quantity %}</td>
-                    <td class="text-center align-middle px-0"><input id="update_cart_button" type="submit" value="Update"></td>
-                  </tr>
-                </form>
+                    </tr>
                   {%endfor%}
         
                   
@@ -83,9 +67,7 @@
                   <div class="text-large"><strong>Rs. {{total_price}}
                     </strong></div>
                   
-                    <br>
-                   <a href="{% url 'view_order' %}" class="button">Checkout</a>
-                </div>
+                   </div>
 
               </div>
             </div>

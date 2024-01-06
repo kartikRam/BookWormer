@@ -1,0 +1,44 @@
+{% load static %}
+<style>
+	.row_lib{
+		margin-top:50px;
+		display: flex;
+	}
+	.row_lib img{
+		margin-bottom: 10px;
+	}	
+	.row_lib h5{
+		font-weight: bolder;
+		margin-bottom: 20px;
+	}
+	.row_lib h6{
+		font-weight: bold;
+		text-align: right;
+	}
+
+</style>
+
+<div class="row_lib">
+	<div class="col" style="width:25%;height:700px;">
+		<img style="width:100%;height:68%" src="{% static 'images/Let_Us_Descend.webp' %}"/>
+		<h5>Let Us Descend (Oprah's Book Club)</h5>
+		<h6>by Jesmyn Ward</h6>
+		<div style="margin-top: 20px;">
+			<p>Equally devastating and uplifting, this is Ward's most magical novel yet – a haunting masterpiece told with gorgeous, lyrical prose.</p>
+		</div>
+	</div>
+	<div class="" style="width:75%; margin-left:1.5%; ">
+		<div class="row" >
+			{% for i in book %}
+			<div style="width:20%;height:400px;margin-left:1.5%">
+				<img style="width:100%;height: 60%;" src="{{i.image.url}}"/>
+				<a href="{% url 'show_book' i.id %}">{{i.name}}</a>
+				<p style="position: absolute; margin-top:20px;">by {{i.author.name}}</p>
+
+			</div>
+			{% endfor %}
+			
+
+		</div>
+	</div>
+</div>

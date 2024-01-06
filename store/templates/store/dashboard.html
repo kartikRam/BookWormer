@@ -3,32 +3,37 @@
 {% load static %}
 {%block content%}
 <style>
-	h3{
-		color:white;
-		margin-top:80px;
-		font-family: 'georgia';
-  		font-weight: bold;
-  		text-align: center;
-  		border-right: 6px solid;
-  		border-left: 6px solid;
-  		border-color:#ffffff;
-	}
-	</style>
-		{% include 'store/slider.html' %}
-		<h3 >  Top author of the year</h3>
-	
-      	{% include 'store/small_scroller.html' %}
-      	<h3 >  Top Buys of the year</h3>
-	  	{% include 'store/swiper.html' %}
+  .row_dashboard_top_heading{
+    display: flex;
+    justify-content: space-between;
+    
+    margin-top: 100px;
+    
+  }
+  .row_dashboard_top_heading h3{
+    font-weight: bolder;
+  }
+  .row_dashboard_top_heading a{
+    text-decoration: underline;
+  }
+</style>
+  
+		{% include 'store/home_nav_design.html' %}
+		  
 
-	  	<script>
-      function leftScroll() {
-        const left = document.querySelector(".scroll-images");
-        left.scrollBy(200, 0);
-      }
-      function rightScroll() {
-        const right = document.querySelector(".scroll-images");
-        right.scrollBy(-200, 0);
-      }
-</script>
+     <div class="row_dashboard_top_heading">
+      <h3> Top books of the BookWorm</h3>
+      <a href="{% url 'show_library' %}">see more</a>
+     </div> 
+    {% include 'store/view_books.html' %}
+    
+
+     <div class="row_dashboard_top_heading">
+      <h3> Explore Books</h3>
+      <a href="{% url 'show_library' %}">see more</a>
+     </div> 
+
+    {% include 'store/books_library.html' %}
+      	
+	  
 {%endblock%}

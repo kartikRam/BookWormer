@@ -1,2 +1,0 @@
-# BookWormer
-A book store

@@ -1,93 +1,62 @@
-{% extends 'store/home.html' %}	
 {% load static %}
 {%block content%}
 
 <style>
 
-.swiper {
-  width: 100%;
-  height: 500px;
-}
+  .swiper {
+    width: 100%;
+    height: 450px;
+  }
 
-.slide-card {
-  background-image: linear-gradient(to top right, #8B5CF6, #EC4899);
-  box-shadow: 6px 7px 8px -7px #8a93fb;
-  margin: 0 50px;
-  border-radius: 0px;
-  border: 0;
-  cursor: grab;
-}
+  .slide-card {
+    /*background-color: linear-gradient(to top right, #EAC696, #EAC696);
+    */
+    background:transparent;
+    /*box-shadow: 6px 7px 8px -7px #8a93fb;
+    */margin: 0 50px;
+    border-radius: 0px;
+    border: 0;
+    cursor: grab;
+  }
 
-.slide-card .slide-card-img-top {
-  border-radius: 5%;
-  margin: 0 auto 0;
-  box-shadow: 0 8px 20px -4px #8a86e8;
-  width: 180px;
-  height: 230px;
-}
+  .slide-card .slide-card-img-top {
+    border-radius: 5%;
+    margin: 0px auto 0;
+    box-shadow: 0 8px 20px -4px #C8AE7D;
+    min-width: 190px;
+    min-height: 250px;
+    max-width: 190px;
+    max-height: 250px;
+  }
 
-.slide-card h5 {
-  color: #ffffff;
-  font-size: 20px;
- 
-}
+  .slide-card h5 {
 
-.slide-card h5 span {
-  font-size: 10px;
-  color: #fffffff;
-}
+    padding-top: 20px;
+    
+    font-size: 20px;
+   
+  }
+
+  .slide-card h5 span {
+    font-size: 10px;
+  }
 
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  align-items: center;
-}
-.swiper-slide-active {
-  transform: scale(1.2);
-}
-h3{
-	color:white;
-	margin-top:80px;
-	font-family: 'georgia';
-  	font-weight: bold;
-  	text-align: center;
-  	border-right: 6px solid;
-  	border-left: 6px solid;
-  	border-color:#ffffff;
-	margin-bottom: -40px;
-}
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+  }
+  .swiper-slide-active {
+    transform: scale(1.2);
+  }
+  
 </style>
-
-	<h3> New Releases</h3>
-	
-	<div class="swiper">
-      <div class="swiper-wrapper">
-        {% for i in book %}
-        <div class="swiper-slide">
-          <div class="slide-card text-center">
-            <img class="slide-card-img-top" src="{{i.image.url}}" alt="" />
-            <div class="slide-card-body">
-              <h5>
-                {{i.name}} <br />
-                <span>by {{i.author.name}} </span><br>
-              	<span>Rs. {{i.price}}</span>
-              </h5>
-            </div>
-          </div>
-        </div>
-        {%endfor%}
-      </div>
-      <!-- If we need navigation buttons -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
-    </div>
-
-	<h3>Best Seller</h3>
+  
 
 	<div class="swiper">
       <div class="swiper-wrapper">
@@ -98,8 +67,8 @@ h3{
             <div class="slide-card-body">
               <h5>
                 {{i.name}} <br />
-                <span>by {{i.author.name}} </span><br>
-                <span>Rs. {{i.price}}</span>
+                <span>by {{i.author.name}} </span>
+              	
               </h5>
             </div>
           </div>
@@ -107,9 +76,10 @@ h3{
         {%endfor%}
       </div>
       <!-- If we need navigation buttons -->
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev" style="color:#F3F8FF"></div>
+      <div class="swiper-button-next" style="color:#F3F8FF"></div>
     </div>
+
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <script>
       const swiper = new Swiper(".swiper", {
@@ -135,8 +105,13 @@ h3{
             slidesPerView: 2,
             spaceBetween: 30
           },
+          
           // when window width is >= 640px
           640: {
+            slidesPerView: 3,
+            spaceBetween: 30
+          },
+          1200: {
             slidesPerView: 4,
             spaceBetween: 10
           }

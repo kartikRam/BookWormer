@@ -1,31 +1,130 @@
 {% load static%}
+  
+<style>
+  * {
+  box-sizing: border-box;
+  }
 
 
-<nav  class="navbar navbar-expand-lg " >
-  <div class="container-fluid">
-    <img src="{%static 'images/logo1.png' %}" style="width:180px;height:50px;"/>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style="margin-top:20px;">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" style="color:#fff" href="{% url 'home' %}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a style="color:#fff" class="nav-link" href="{% url 'books' %}">Books</a>
-        </li>
-        
-        <li class="nav-item" style="margin-left:800px;">
-          <img style="width:60px;height:60px;border-radius:50%;margin-top:-10px;" src="{%static 'images/author1.jpg' %}" class="nav-link" >
-        </li>
-          
-        <li class="nav-item" >
-          <a style="color:#fff" class="nav-link" href="{% url 'logout' %}">Logout</a>
-        </li>
-      </ul>
+  .nav {
+    margin:auto;
+    height: 60px;
+    width: 90%;
+    background-color: #F7FBFC;
+    position: relative;
+    justify-content: space-between
+  }
 
+  .nav > .nav-header {
+    display: inline;
+  }
+
+  .nav > .nav-header > .nav-title {
+    display: inline-block;
+    font-size: 22px;
+    color: #769FCD;
+    padding: 10px 10px 10px 10px;
+  }
+
+  .nav > .nav-btn {
+    display: none;
+  }
+
+  .nav > .nav-links {
+    display: inline-flex;
+    float: right;
+    font-size: 18px;
+  }
+
+  .nav > .nav-links > a {
+    display: inline-block;
+    padding: 13px 10px 13px 10px;
+    text-decoration: none;
+    color: #769FCD;
+  }
+
+  .nav > .nav-links > a:hover {
+    background-color: rgb(185, 215, 234);
+    color:#ffffff
+  }
+
+  .nav > #nav-check {
+    display: none;
+  }
+
+  @media (max-width:600px) {
+    .nav > .nav-btn {
+      display: inline-block;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+    .nav > .nav-btn > label {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      padding: 13px;
+    }
+    .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+      background-color: rgba(185, 215, 234);
+    }
+    .nav > .nav-btn > label > span {
+      display: block;
+      width: 25px;
+      height: 10px;
+      border-top: 2px solid #769FCD;
+    }
+    .nav > .nav-links {
+      position: absolute;
+      display: block;
+      width: 100%;
+      background-color: #F7FBFC;
+      height: 0px;
+      transition: all 0.3s ease-in;
+      overflow-y: hidden;
+      top: 50px;
+      left: 0px;;
+    }
+    .nav > .nav-links > a {
+      display: block;
+      width: 100%;
+    }
+    .nav > #nav-check:not(:checked) ~ .nav-links {
+      height: 0px;
+    }
+    .nav > #nav-check:checked ~ .nav-links {
+      height: calc(100vh - 50px);
+      overflow-y: auto;
+    }
+  }
+</style>
+
+
+<div class="nav">
+  <input type="checkbox" id="nav-check">
+  <div class="nav-header">
+    <div class="nav-title">
+    BookWorm
     </div>
   </div>
+  <div class="nav-btn">
+    <label for="nav-check">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+  </div>
   
-</nav> 
+  <div class="nav-links">
+    <a href="{% url 'home' %}" >Home</a>
+    {% if request.user.is_anonymous %}
+      <a href="{% url 'login' %}" >Login</a>
+    {%else%}
+    <a href="" >{{request.user.username}}</a>
+    <a href="{% url 'view_order' %}" >order</a>
+    <a href="{% url 'show_cart' %}" ><i class="fa fa-shopping-cart"></i></a>
+    <a href="{% url 'logout' %}" >Logout</a>
+    {% endif %}
+    
+  </div>
+</div>

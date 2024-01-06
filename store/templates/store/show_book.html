@@ -3,34 +3,30 @@
 {% block content %}
 <style>
 	
-	.product-view .product-name{
+.product-view .product-name{
     font-size: 28px;
-
-    color: #ffffff;
 }
 .product-view .product-name .label-stock{
-    font-size: 13px;
-    padding: 4px 13px;
+    font-size: 13.5px;
+    padding: 4px 10px;
+    margin-top: 9px;
+    color: white;
     border-radius: 5px;
-    color: #fff;
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
     float: right;
 }
 .product-view .product-path{
     font-size: 13px;
     font-weight: 500;
-    color: #ffffff;
     margin-bottom: 16px;
 }
 .product-view .selling-price{
     font-size: 26px;
-    color: #ffffff;
     font-weight: 600;
     margin-right: 8px;
 }
 .product-view .original-price{
     font-size: 18px;
-    color: #ffffff;
     font-weight: 400;
     text-decoration: line-through;
 }
@@ -57,33 +53,66 @@
 .button{
   border: none;
   font-size: 12px;
-  color: #ffffff;
   padding: 8px 16px;
-  background-color: #EC4899;
+  background-color: #769FCD;
+  color:white;
   border-radius: 6px;
-  margin-top: 10px;
-  margin-left: -50px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .button:hover{
-  background-color:#8B5CF6 ;
-  color:#ffffff;
+  background-color:#ffffff;
+  color: #769FCD;
+  border:1px solid black;
+
 }
 i::before{
     background:transparent;
 }
+.flash_message {
+  text-align: left;
+  width: 50%;
+  position: absolute;
+  height: auto;
+  padding: 1em;
+  font-size: 14px;
+  top: 55px;
+  z-index: 1000;
+  display: block;
+  margin-left: 43em;
+  padding-left: 10%;
+ 
 
+  animation: slide-up 1.25s forwards;
+  animation-delay: 2.25s;
+  -webkit-animation-delay: 2.25s;
+  
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  &.success {
+    color: #fff;
+    background: #769FCD;
+  }
+ 
+}
+
+
+@-webkit-keyframes slide-up {
+    from {transition: translateY(0);opacity: 1}
+    to {transition: translateY(-150px);opacity: 0;top:0px;}
+}
 </style>
 	<br>
 	<div class="py-3 py-md-5 ">
         <div class="container">
             <div class="row">
                 <div class="col-md-5 mt-3">
-                    <div class="bg-white border">
-                        <img style="height:600px" src="{{book.image.url}}" class="w-100" alt="Img">
+                    <div>
+                        <img style="height:350px;width: 280px" src="{{book.image.url}}"  alt="Img">
                     </div>
-                        
                 </div>
                 <div class="col-md-7 mt-3">
                     <div class="product-view">
@@ -92,59 +121,77 @@ i::before{
                             <label class="label-stock bg-success">In Stock</label>
                         </h4>
                         <hr>
+                        <div class="mt-3" >
+                            <p>
+                                {{book.description}}
+                            </p>
+                        </div>
+                        
                         <p class="product-path">
                             by {{book.author.name}}
                         </p>
                         <div>
-                            <span class="selling-price">{{book.price}}</span>
-                            <span class="original-price">{{book.price}}</span>
+                            <span class="selling-price">₹ {{book.price}}</span>
                         </div>
-                        <div class="mt-2">
+                        
+                        <div class="mt-2" >
                             <div style="color:white; padding:10px;" class="input-group">
-                                <span class="btn btn1"><button style="border-width: 0; margin-top:7px;background: transparent;color:white;" onclick="decrease()" ><i class="fa fa-minus"></i></button></span>
-                                <h4 style=" margin-left: 10px;margin-right: 10px; margin-top:10px;font-size: 28px;">
-                                </h4>
-                                <form action="{% url 'cart' book.id %}" method="POST">
-                                    {% csrf_token %}
-                                <input  style=" font-size:23px;margin-top:13px;margin-left:-10px;margin-right:10px;background: transparent;text-align:center;border-width:0;width:15px;height:28px;color:white; type="value" min="1" value=1 id="quant" name="quant" readonly />
+                                <span class="btn btn1">
+                                    <button style="border-width: 0;background: transparent;" onclick="decrease()">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </span>
+                                <input  style=" font-size:23px; background: transparent;text-align:center;
+                                border-width:0;" type="value" min="1" value="1" id="quant" name="quant" readonly />
                                 
                                     <span class="btn btn1">
-                                        <button style="border-width: 0;background:transparent;color:white;" onclick="increase()">
+                                        <button style="border-width: 0;background:transparent;" onclick="increase()">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                     </span>
                                     
 
-                                    <div class="mt-2">                        
-                                        <input type="submit" class="button" value="Add To Cart"> </input>
-                                    </div>
-                                </form>
+                                    
                             
                             </div>
                         </div>
-                        <br><br>
-                        <div class="mt-3" style="color:white;">
-                            <h5 class="mb-0">Small Description</h5>
-                            <p>
-                                {{book.description}}
-                            </p>
+                        <div class="mt-2">    
+                            <form method="POST" action="{% url 'cart' book.id %}">
+                                {% csrf_token %}
+                        
+                                <input type="hidden" id="book_quant" name="book_quant" value="1"/>
+                                <input type="submit" class="button"  value="Add To Cart"/>
+                                        
+                            </form>
                         </div>
+        
                     </div>
                 </div>
             </div>
         </div>
+                            <div>
+                            {% for message in messages%}
+                                <section ng-show="success_message" class="flash_message success">
+                                    <p>{{message}}</p>
+                                </section>
+                                
+                            {%endfor%}
+                        </div>   
+
     </div>
 
 </div>
 <script>
-function increase() {
-  document.getElementById("val").value++;
-}
-
-function decrease() {
-    if(document.getElementById("val").value!=1){
-         document.getElementById("val").value--;
+    function increase() {
+        document.getElementById("quant").value++;
+        document.getElementById("book_quant").value=document.getElementById("quant").value;
     }
-}
+
+    function decrease() {
+        if(document.getElementById("quant").value!=1){
+             document.getElementById("quant").value--;
+            document.getElementById("book_quant").value=document.getElementById("quant").value;
+        }
+    }
 </script>
 {%endblock%}

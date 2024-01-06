@@ -95,4 +95,14 @@ class cart(models.Model):
     def __str__(self):
         return self.book.name
 
+class order(models.Model):
+    book=models.ForeignKey(books,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    quantity=models.IntegerField()
+    price=models.IntegerField()
+    date_created=models.DateTimeField(auto_now_add=True,null=True)
+
+    def __str__(self):
+        return self.book.name
+
 

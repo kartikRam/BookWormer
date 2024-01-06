@@ -1,0 +1,72 @@
+{% extends 'store/home.html' %}
+{% load static %}
+{% block content %}
+<style>
+	.row_lib{
+		margin-top:50px;
+		display: flex;
+	}
+	.row_lib img{
+		margin-bottom: 10px;
+	}	
+	.row_lib h5{
+		font-weight: bolder;
+		margin-bottom: 20px;
+	}
+	.row_lib h6{
+		font-weight: bold;
+		text-align: right;
+	}
+	#form_edit{
+		text-align: right;
+		width:91%;
+		margin:auto;
+	}
+	#form_edit input{
+		margin-right:10px;
+		
+	}
+
+	#form_edit select{
+	
+		margin-right:10px;
+		
+	}
+	#form_edit button{
+		border-radius: 5px;
+		padding: 5px 15px;
+		border: 0;
+		background: #389c58;
+    	color: white;
+	}
+</style>
+
+<div class="row_lib">
+	
+	<div class="" style="width:100%; margin-left:1.5%; ">
+		<form method="get" id="form_edit">
+        		<label> Name</label>
+        		{{filter.form.name}}
+        		<label> Author</label>
+        		{{filter.form.author}}
+        		<label> Genre</label>
+        		{{filter.form.genre}}
+        		
+        		<button  type="submit">Search</button>
+     		</form>
+		<div class="row" >
+			
+			{% for i in book %}
+			<div style="width:23%;height:500px;margin-left:1%;margin-top: 4%;">
+				<img style="width:100%%;height: 80%;" src="{{i.image.url}}"/>
+				<a href="{% url 'show_book' i.id %}">{{i.name}}</a>
+				<p style="position: absolute; margin-top:20px;">by {{i.author.name}}</p>
+
+			</div>
+			{% endfor %}
+			
+
+		</div>
+	</div>
+</div>
+{%endblock%}
