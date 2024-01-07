@@ -1,0 +1,98 @@
+{% extends 'store/admin/home.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .profile-pic{
+        width:70%;
+    	height:70%;
+        margin:0 auto;
+        border-radius: 10px;
+    }
+    .book_div{
+    	margin-top: 40px;
+    	margin-bottom: 70px;
+    	width: 100%;
+    	display: flex;
+    	justify-content: space-between;
+    	
+    }
+    .form_input input{
+    	width:350px;
+    	height: 30px;;
+    }
+    .form_input{
+    	text-align: left;
+    }
+</style>
+<br>
+<h1 style="text-align:center;margin-top: 40px;">Create Book</h1>
+
+<div class="book_div">
+    
+    
+	    <div style="width:65%;" >
+	        <div class="card card-body">
+	            <form method="POST" id="book_form" action="{% url 'admin_create_books'  %}" enctype="multipart/form-data">
+	                {%  csrf_token %}
+	                <div class="column">
+	                	<div class="column">
+		                	<label>Name:</label>&nbsp
+		                	<div  class="form_input" style="width:400px;height:30px;">
+			                	{{form.name}}
+			            	</div>
+		            	</div>
+		                <br>
+		            	<div class="column">
+		                	<label>Description:</label>&nbsp
+		                	<div  class="form_input" style="width:400px;height:30px;">
+			            		{{form.description}}
+			            	</div>
+		            	</div>
+		                <br>
+		       			<div class="column">
+		                	<label>Genre:</label>&nbsp
+		                	<div  class="form_input" style="width:400px;height:30px;">
+			            		{{form.genre}}
+			            	</div>
+		            	</div>
+		       			<br>
+		       			<div class="column">
+		                	<label>ISBN:</label>&nbsp
+		                	<div  class="form_input" style="width:400px;height:30px;">
+			            		{{form.isbn}}
+			            	</div>
+		            	</div>
+		            	<br>
+
+		       			<div class="column">
+		                	<label>Image:</label>&nbsp
+		                	<div>
+		                		
+		                	{{form.image}}
+		                	</div>
+		     		    </div>
+						<br>
+
+		       			<div class="column">
+		                	<label>Price:</label>&nbsp
+		                	<div  class="form_input" style="width:400px;height:30px;">
+			            		{{form.price}}
+			            	</div>
+		            	</div>
+		            	<br>
+		       			<div class="column">
+		                	<label>Author:</label>&nbsp
+		                	<div  class="form_input" style="width:400px;height:30px;">
+			            		{{form.author}}
+			            	</div>
+		            	</div>
+		            	<br>
+	            	</div>
+	                <input class="btn btn-primary" type="submit" value="Update">
+	            </form>
+	        </div>
+	    </div>
+    
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'store/admin/home.html' %}
+{% load static%}
+{% block content %}
+<style>
+	table, th, td {
+    border: 0px solid black;
+  	}
+  	.table-responsive{
+  		margin:10px 20px;
+  	}
+  	.button{
+	  border: none;
+	  font-size: 12px;
+	  padding: 8px 16px;
+	  background-color: #4723D9;
+	  color:white;
+	  border-radius: 6px;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	}
+	.button:hover{
+	  background-color:#ffffff;
+	  color: #4723D9;
+	  border:1px solid black;
+
+	}
+	</style>
+<h2>Books</h2>
+       		
+
+       		<a href="{% url 'admin_create_books'  %}" >Create Book</a>
+           <div class="table-responsive">
+              <table class="table  m-0">
+                <thead>
+                  <tr>
+                    <!-- Set columns width -->
+                    <th class="text-center py-15 px-1" style="min-width: 300px;">Name</th>
+                    <th class="text-right py-3 px-4" style="width: 100px;">Genre</th>
+                    <th class="text-center py-3 px-4" style="width: 100px;">Price</th>
+                    <th class="text-center py-3 px-4" style="width: 200px;">Author</th>
+                    <th class="text-center align-middle py-3 px-0" style="width: 60px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+        
+                  {% for i in book%}
+                      
+                  <tr>
+                    <td class="p-4">
+                      
+                      <div class="media align-items-center">
+                        <img style="height:300px" src="{{i.image.url}}" class="d-block ui-w-40 ui-bordered mr-4" alt="">
+                        <div class="media-body" >
+                          {{i.name}}
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-right font-weight-semibold align-middle p-4">{{i.genre}}</td>
+                    <td class="text-right font-weight-semibold align-middle p-4">{{i.price}}</td>
+                    <td class="text-right font-weight-semibold align-middle p-4">by {{i.author.name}}
+                    </td>
+
+                    <td class="text-center align-middle px-0"><a  href="{%url 'admin_books_update' i.id  %}"  class="button">View/Update</a></td>
+
+                  </tr>
+               	{%endfor%}
+        
+                  
+                </tbody>
+              </table>
+            </div>
+{%endblock%}

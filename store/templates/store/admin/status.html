@@ -1,4 +1,9 @@
 <br>
+<style>
+    #total-orders{
+        background-color: #AFA5D9;
+    }
+</style>
 <div class="row">
     <div class="col">
         <div class="col-md">
@@ -7,7 +12,7 @@
                     <h5 class="card-title">Total Orders</h5>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">56</h3>
+                    <h3 class="card-title">{{total_order}}</h3>
                 </div>
             </div>
         </div>
@@ -20,7 +25,7 @@
                     <h5 class="card-title">Oders Delivered</h5>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">32</h3>
+                    <h3 class="card-title">{{total_delivered_order}}</h3>
                 </div>
             </div>
         </div>
@@ -33,7 +38,7 @@
                     <h5 class="card-title">Out for Delivery</h5>
                 </div>
                 <div class="card-body">
-                    <h3 class="card-title">12</h3>
+                    <h3 class="card-title">{{total_out_for_delivery_order}}</h3>
                 </div>
             </div>
         </div>

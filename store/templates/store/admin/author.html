@@ -1,0 +1,64 @@
+{% extends 'store/admin/home.html' %}
+{% load static%}
+{% block content %}
+<style>
+	table, th, td {
+    border: 0px solid black;
+  	}
+  	.table-responsive{
+  		margin:10px 20px;
+  	}
+  	.button{
+	  border: none;
+	  font-size: 12px;
+	  padding: 8px 16px;
+	  background-color: #4723D9;
+	  color:white;
+	  border-radius: 6px;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	}
+	.button:hover{
+	  background-color:#ffffff;
+	  color: #4723D9;
+	  border:1px solid black;
+
+	}
+	</style>
+<h2>Authors</h2>
+        <a href="{% url 'admin_create_author' %}">create author</a>
+           <div class="table-responsive">
+              <table class="table  m-0">
+                <thead>
+                  <tr>
+                    <!-- Set columns width -->
+                    <th class="text-left py-15 px-1" style="min-width: 300px;">Name</th>
+                    <th class="text-left py-3 px-4" style="width: 300px;">Details</th>
+                    <th class="text-center align-middle py-3 px-0" style="width: 60px;"></th>
+                  </tr>
+                </thead>
+                <tbody>
+        
+                  {% for i in author%}
+                      
+                  <tr>
+                    <td class="p-4">
+                      
+                      <div class="media align-items-left">
+                        <div class="media-body" >
+                          {{i.name}}
+                        </div>
+                      </div>
+                    </td>
+                    <td class="text-left font-weight-semibold align-middle p-4">{{i.details}}</td>
+
+                    <td class="text-center align-middle px-0"><a  href="{%url 'admin_author_update' i.id  %}"  class="button">View/Update</a></td>
+
+                  </tr>
+               	{%endfor%}
+        
+                  
+                </tbody>
+              </table>
+            </div>
+{%endblock%}

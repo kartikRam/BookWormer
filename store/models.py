@@ -51,6 +51,12 @@ GENRES=(
 	('Historical Fiction','Historical Fiction'),('Horror','Horror'),
 	('Inspirational','Inspirational'),('Magical Realism','Magical Realism'),
 	('Mystery','Mystery'),('Mythology','Mythology'),('Poetry','Poetry'),('Romance','Romance'),)
+
+STATUS=(
+    ('0','Out for Delivery'),
+    ('1','Delivered'),
+    )
+
 # Create your models here.
 class Customer(models.Model):
     user=models.OneToOneField(User,null=True,on_delete=models.CASCADE)
@@ -100,6 +106,7 @@ class order(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     quantity=models.IntegerField()
     price=models.IntegerField()
+    status=models.CharField(choices=STATUS,max_length=50,default='0')
     date_created=models.DateTimeField(auto_now_add=True,null=True)
 
     def __str__(self):

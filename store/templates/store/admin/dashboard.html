@@ -2,4 +2,191 @@
 {% load static%}
 {%block content%}
 	{% include 'store/admin/status.html' %}
+
+	<style type="text/css">
+					*,
+			*::before,
+			*::after {
+			  box-sizing: border-box;
+			}
+
+
+			#bar_chart {
+			  width: 45%;
+			  padding: 1.5rem 1.5rem 2rem;
+			  border-top:2px solid #AFA5D9;
+			  border-bottom:2px solid #AFA5D9;
+			  
+			}
+			#piechart {
+			  	text-align: right;
+			  	width: 48%;
+			  	border-top:2px solid #AFA5D9;
+				border-bottom:2px solid #AFA5D9;
+			  
+			  }
+			
+			h2 {
+			  margin: 0 0 2.5rem;
+			}
+
+			.chart {
+			  display: grid;
+			  grid-template-columns: auto;
+			  gap: .5em 0;
+			  align-items: center;
+			  margin: 0;
+			  padding: 0;
+			  list-style-type: none;
+			  grid-auto-columns: 1fr;
+			}
+
+			li {
+			  background: #ffd100;
+			  display: flex;
+			  align-items: center;
+			  justify-content: space-between;
+			  padding: 0.25rem 0.5rem
+			}
+
+			li span {
+			  font-weight: bold;
+			}
+			.charts{
+				display: flex;
+				margin: auto;
+				justify-content: space-between;
+				margin-top: 3%;
+				margin-bottom: 3%;
+			}
+
+	</style>
+
+
+	<div class="charts">
+		<div id="bar_chart">
+		  
+		 </div> 
+		 <div id="piechart"></div>
+	</div>
+		<div>
+			<form method="post" action="{%url 'adminbw'  %}" id="form_edit">
+				{% csrf_token %}
+				<label>Author:</label>
+        		<select name="author" id="author">
+        			{%for i in author %}
+        				{% if select_aut  ==  i.id %}
+        					<option value={{i.id}} selected>{{i.name}}</option>
+        				{% else %}
+        					<option value={{i.id}}>{{i.name}}</option>
+        				{% endif %}
+        			{%endfor%}
+        		</select>
+        		<input  type="submit" value="Search"/>
+     		</form>
+		
+			<div id="chart_div">
+			
+			</div>
+		</div>
+
+
+
+
+
+			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+			<script type="text/javascript">
+			// Load google charts
+			google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+
+			// Draw the chart and set the chart values
+			function drawChart() {
+			  var data = google.visualization.arrayToDataTable([
+			  ['Author', 'Sales'],
+			  {% for key,value in author_data.items%}
+			  	['{{key}}',{{value}}],
+			  {%endfor%}
+			]);
+
+			  // Optional; add a title and set the width and height of the chart
+			  var options = {'title':'Top Authors',
+			  				titleTextStyle: {
+						        fontSize: 32, // 12, 18 whatever you want (don't specify px)
+						        bold: false,    // true or false
+						        italic: false,
+					    		}, 'width':800,'height':400,'is3D':true
+							};
+
+			  // Display the chart inside the <div> element with id="piechart"
+			  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			  chart.draw(data,options);
+			}
+			</script>
+			<script type="text/javascript">
+				// Load the visualization library and set a callback
+				google.charts.load('current', { 'packages': ['corechart'] });
+				google.charts.setOnLoadCallback(drawChart);
+
+				function drawChart() {
+					// Define the data for the chart
+					var data = google.visualization.arrayToDataTable([
+						['Book', 'Sales'],
+						{% for key,value in book_data.items %}
+							['{{key}}', {{value}}],
+						{%endfor%}
+						
+					]);
+					var data2 = google.visualization.arrayToDataTable([
+						['Book', 'Sales'],
+						{% for key,value in order_data.items %}
+							['{{key}}', {{value}}],
+						{%endfor%}
+						
+					]);
+						
+					// Set chart options
+					var options = {
+						title: 'Sales by Author',
+						titleTextStyle: {
+						        fontSize: 32, // 12, 18 whatever you want (don't specify px)
+						        bold: false,    // true or false
+						        italic: false,
+					    		},
+						width: 600,
+						height: 400,
+						legend: { position: 'none' },
+						chartArea: { width: '50%' },
+						hAxis: {
+							title: 'Sales',
+							minValue: 0
+						},
+						vAxis: {
+							title: 'book'
+						}
+					};
+					var options1 = {
+						title: 'Top Buys',
+						width: 600,
+						height: 400,
+						legend: { position: 'none' },
+						chartArea: { width: '50%' },
+						hAxis: {
+							title: 'Sales',
+							minValue: 0
+						},
+						vAxis: {
+							title: 'book'
+						}
+					};
+
+					// Create a new bar chart and pass in the data and options
+					var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+					chart.draw(data, options);
+					var chart1 = new google.visualization.BarChart(document.getElementById('bar_chart'));
+					chart1.draw(data2, options1);
+				}
+
+			</script>
 {%endblock%}
